@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "events.tac.local", "events.tac.local\events.tac.local.csproj", "{2F0A6DE3-5A4E-49CD-AB6B-25474FB73631}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "events.tac.local.Tests", "events.tac.local.Tests\events.tac.local.Tests.csproj", "{2D360F64-EB51-463D-A5F5-769329922693}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F0A6DE3-5A4E-49CD-AB6B-25474FB73631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F0A6DE3-5A4E-49CD-AB6B-25474FB73631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F0A6DE3-5A4E-49CD-AB6B-25474FB73631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F0A6DE3-5A4E-49CD-AB6B-25474FB73631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D360F64-EB51-463D-A5F5-769329922693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D360F64-EB51-463D-A5F5-769329922693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D360F64-EB51-463D-A5F5-769329922693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D360F64-EB51-463D-A5F5-769329922693}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1744C219-A304-408E-B6E0-C23C2544C566}
+	EndGlobalSection
+EndGlobal
