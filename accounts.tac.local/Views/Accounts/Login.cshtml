@@ -1,0 +1,58 @@
+﻿@using accounts.tac.local
+@using accounts.tac.local.Services
+@using accounts.tac.local.Extensions.SitecoreExtensions
+@using Sitecore.Mvc.Configuration
+@model accounts.tac.local.Models.LoginInfo
+
+@using (Html.BeginRouteForm(MvcSettings.SitecoreRouteName, FormMethod.Post, new {@class = "form-signin"}))
+{
+    @Html.Hidden("ReturnUrl", Model.ReturnUrl)
+    @Html.AddUniqueFormId()
+    @Html.ValidationSummary(true)
+    <div class="form-group @Html.ValidationErrorFor(x => x.UserName, "has-error")">
+        @Html.LabelFor(x => x.UserName, new
+        {
+            @class = "control-label"
+        })
+        @Html.TextBoxFor(x => x.UserName, new
+        {
+            @class = "form-control",
+            id = "loginEmail",
+            placeholder = "Enter your UserName"
+        })
+        @Html.ValidationMessageFor(x => x.UserName, "", new
+        {
+            @class = "help-block"
+        }, "p")
+    </div>
+    <div class="form-group @Html.ValidationErrorFor(x => x.Password, "has-error")">
+        @Html.LabelFor(x => x.Password, new
+        {
+            @class = "control-label"
+        })
+        @Html.PasswordFor(x => x.Password, new
+        {
+            @class = "form-control",
+            id = "loginPassword",
+            placeholder = "Enter your password"
+        })
+        @Html.ValidationMessageFor(x => x.Password, "", new
+        {
+            @class = "help-block"
+        }, "p")
+    </div>
+    @Html.ValidationMessage("invalidCredentials", new
+    {
+        @class = "alert alert-danger"
+    }, "div")
+    <div class="row">
+        <div class="col-lg-6">
+            <input type="submit" class="btn btn-primary btn-block" value="Login"/>
+        </div>
+        <div class="col-lg-6">
+            <a href="@AccountsSettingsService.Instance.GetPageLinkOrDefault(Sitecore.Context.Item, Templates.AccountsSettings.Fields.RegisterPage)" class="btn btn-default btn-block">Register</a>
+        </div>
+    </div>
+    <a href="@AccountsSettingsService.Instance.GetPageLinkOrDefault(Sitecore.Context.Item, Templates.AccountsSettings.Fields.ForgotPasswordPage)" class="btn btn-link">"Forgot your password?"</a>
+}
+@Html.Partial("~/Views/Accounts/_FedAuth.cshtml", Model)

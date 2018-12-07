@@ -1,0 +1,19 @@
+/*body {
+    background-color: #454545;
+}*/
+
+/*.dropdown-menu {
+    background-color: lightgray;
+}*/
+.form-content {
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;   
+}
+.form-content:first-child {
+    margin: auto;
+}
+.form-signin {
+    width: 350px;
+}

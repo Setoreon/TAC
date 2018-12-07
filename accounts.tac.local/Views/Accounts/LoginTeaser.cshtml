@@ -1,0 +1,91 @@
+﻿@using accounts.tac.local.Services
+@using accounts.tac.local.Extensions.SitecoreExtensions
+@using Sitecore.Mvc
+@model accounts.tac.local.Models.LoginInfo
+
+@{
+    var item = Html.Sitecore().CurrentItem;
+    var titleField = Templates.LoginTeaser.Fields.Title;
+    var summaryField = Templates.LoginTeaser.Fields.Summary;
+    var isLoggedIn = Sitecore.Context.IsLoggedIn && Sitecore.Context.PageMode.IsNormal;
+    if (isLoggedIn)
+    {
+        titleField = Templates.LoginTeaser.Fields.LoggedInTitle;
+        summaryField = Templates.LoginTeaser.Fields.LoggedInSummary;
+    }
+    //Html.Sitecore().CurrentRendering.GetBackgroundClass()
+}
+
+<div class="well">
+    @if (item.FieldHasValue(titleField) || Sitecore.Context.PageMode.IsExperienceEditor)
+    {
+        <h4>
+            @Html.Sitecore().Field(titleField, item)
+        </h4>
+    }
+
+    @if (item.FieldHasValue(summaryField) || Sitecore.Context.PageMode.IsExperienceEditor)
+    {
+        <p>
+            @Html.Sitecore().Field(summaryField, item, new { linebreaks = "<br/>" })
+        </p>
+    }
+
+    @if (Sitecore.Context.PageMode.IsExperienceEditor)
+    {
+        <div class="well bg-info">
+            <label>
+                "These fields are shown when the user is logged in."
+            </label>
+            <h4>
+                @Html.Sitecore().Field(Templates.LoginTeaser.Fields.LoggedInTitle, item)
+            </h4>
+            <p>
+                @Html.Sitecore().Field(Templates.LoginTeaser.Fields.LoggedInSummary, item, new
+                                                                                           {
+                                                                                               linebreaks = "<br/>"
+                                                                                           })
+            </p>
+        </div>
+    }
+
+    @if (!isLoggedIn)
+    {
+        using (Html.BeginRouteForm(Sitecore.Mvc.Configuration.MvcSettings.SitecoreRouteName, FormMethod.Post, new { @class = "form-signin" }))
+        {
+            @Html.AddUniqueFormId()
+            @Html.ValidationSummary(true)
+            <div class="form-group @Html.ValidationErrorFor(x=>x.UserName, "has-error")">
+                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", id = "loginEmail", placeholder = "Enter your userName" })
+                @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "help-block" }, "p")
+            </div>
+            <div class="form-group @Html.ValidationErrorFor(x=>x.Password, "has-error")">
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control", id = "loginPassword", placeholder = "Enter your password" })
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "help-block" }, "p")
+            </div>
+            @Html.ValidationMessage("invalidCredentials", new { @class = "alert alert-danger" }, "div")
+            <input type="submit" class="btn btn-primary btn-block" value="Login" />
+            <a href="@AccountsSettingsService.Instance.GetPageLinkOrDefault(Sitecore.Context.Item, Templates.AccountsSettings.Fields.RegisterPage)" class="btn btn-link btn-block">Register</a>
+            <a href="@AccountsSettingsService.Instance.GetPageLinkOrDefault(Sitecore.Context.Item, Templates.AccountsSettings.Fields.ForgotPasswordPage)" class="btn btn-link btn-block">Forgot your password?</a>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("Logout", "Accounts", FormMethod.Post))
+        {
+            if (!string.IsNullOrWhiteSpace(Sitecore.Context.User.Profile.FullName))
+            {
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <div class="form-control-static">@Sitecore.Context.User.Profile.FullName</div>
+                </div>
+            }
+            <div class="form-group">
+                <label class="control-label">E-mail</label>
+                <div class="form-control-static">@Sitecore.Context.User.Profile.Email</div>
+            </div>
+            <a class="btn btn-block btn-primary" href="@AccountsSettingsService.Instance.GetPageLinkOrDefault(item, Templates.AccountsSettings.Fields.AccountsDetailsPage)">Edit details</a>
+            <button type="submit" class="btn btn-block btn-default">Logout</button>
+        }
+    }
+</div>

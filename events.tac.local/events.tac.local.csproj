@@ -48,6 +48,24 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Sitecore.ContentSearch, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ContentSearch.NoReferences.9.0.0\lib\net461\Sitecore.ContentSearch.dll</HintPath>
+      <Private>False</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.ContentSearch.Linq.NoReferences.9.0.0\lib\net461\Sitecore.ContentSearch.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Kernel, Version=11.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Kernel.NoReferences.9.0.0\lib\net461\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Mvc.NoReferences.9.0.0\lib\net461\Sitecore.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc.Analytics, Version=11.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sitecore.Mvc.Analytics.NoReferences.9.0.0\lib\net461\Sitecore.Mvc.Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -64,6 +82,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="TAC.Utils, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\inetpub\wwwroot\vsg.sc9cms\bin\TAC.Utils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -89,19 +110,192 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Compile Include="Business\BreadcrumbBuilder.cs" />
+    <Compile Include="Business\EventsProvider.cs" />
+    <Compile Include="Business\LikeService.cs" />
+    <Compile Include="Business\NavigationBuilder.cs" />
+    <Compile Include="Business\RelatedEventsProvider.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\BreadcrumbController.cs" />
+    <Compile Include="Controllers\EventIntroController.cs" />
+    <Compile Include="Controllers\EventsListController.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\RelatedEventsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Models\EventDetails.cs" />
+    <Compile Include="Models\EventIntro.cs" />
+    <Compile Include="Models\EventsList.cs" />
+    <Compile Include="Models\NavigationItem.cs" />
+    <Compile Include="Models\NavigationMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Fonts\bitter-v7-latin-700.svg" />
+    <Content Include="Fonts\bitter-v7-latin-italic.svg" />
+    <Content Include="Fonts\bitter-v7-latin-regular.svg" />
+    <Content Include="Fonts\fontawesome-webfont.svg" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-300.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-300italic.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-600.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-600italic.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-700.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-700italic.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-800.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-italic.svg" />
+    <Content Include="Fonts\open-sans-v13-latin-regular.svg" />
+    <Content Include="Images\carousel-climbing.jpg" />
+    <Content Include="Images\carousel-cycling.jpg" />
+    <Content Include="Images\carousel-hiking.jpg" />
+    <Content Include="Images\carousel-skiing.jpg" />
+    <Content Include="Images\climbing-events.jpg" />
+    <Content Include="Images\Climbing-the-Face-of-Half-Dome.jpg" />
+    <Content Include="Images\cycling-events.jpg" />
+    <Content Include="Images\Cycling-from-Bangkok-to-Chiang-Mai.jpg" />
+    <Content Include="Images\hiking-events.jpg" />
+    <Content Include="Images\Hiking-the-Italian-Alps.jpg" />
+    <Content Include="Images\Logo_400x60.png" />
+    <Content Include="Images\Rock-Climbing-in-the-Czech-Republic.jpg" />
+    <Content Include="Images\skiing-events.jpg" />
+    <Content Include="Images\Skiing-the-Himalayas.jpg" />
+    <Content Include="Scripts\Events\Events.js" />
+    <Content Include="Scripts\Events\Navigation.js" />
+    <Content Include="Scripts\Events\Sitecore.Foundation.Theming.min.js" />
+    <Content Include="Styles\Events\addition.css" />
+    <Content Include="Styles\Events\bower_components\bootstrap-sass\assets\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="Styles\Events\bower_components\bootstrap-sass\assets\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\Events\bower_components\bootstrap-sass\assets\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="Styles\Events\bower_components\bootstrap-sass\assets\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="Styles\Events\bower_components\bootstrap-sass\assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="Styles\Events\bower_components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Styles\Events\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Styles\Events\bower_components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Styles\Events\bower_components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Styles\Events\bower_components\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Styles\Events\bower_components\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Styles\Events\Difficulty.css" />
+    <Content Include="Styles\Events\Events.css" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Styles\Events\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Styles\Events\font-awesome.min.css" />
+    <Content Include="Styles\Events\niteflight.min.css" />
+    <Content Include="Styles\Events\vendor.min.css" />
+    <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\web.config" />
+    <Content Include="Fonts\bitter-v7-latin-700.eot" />
+    <Content Include="Fonts\bitter-v7-latin-700.ttf" />
+    <Content Include="Fonts\bitter-v7-latin-700.woff" />
+    <Content Include="Fonts\bitter-v7-latin-700.woff2" />
+    <Content Include="Fonts\bitter-v7-latin-italic.eot" />
+    <Content Include="Fonts\bitter-v7-latin-italic.ttf" />
+    <Content Include="Fonts\bitter-v7-latin-italic.woff" />
+    <Content Include="Fonts\bitter-v7-latin-italic.woff2" />
+    <Content Include="Fonts\bitter-v7-latin-regular.eot" />
+    <Content Include="Fonts\bitter-v7-latin-regular.ttf" />
+    <Content Include="Fonts\bitter-v7-latin-regular.woff" />
+    <Content Include="Fonts\bitter-v7-latin-regular.woff2" />
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Fonts\FontAwesome.otf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-300.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-300.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-300.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-300.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-300italic.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-300italic.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-300italic.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-300italic.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-600.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-600.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-600.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-600.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-600italic.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-600italic.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-600italic.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-600italic.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-700.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-700.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-700.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-700.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-700italic.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-700italic.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-700italic.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-700italic.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-800.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-800.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-800.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-800.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-italic.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-italic.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-italic.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-italic.woff2" />
+    <Content Include="Fonts\open-sans-v13-latin-regular.eot" />
+    <Content Include="Fonts\open-sans-v13-latin-regular.ttf" />
+    <Content Include="Fonts\open-sans-v13-latin-regular.woff" />
+    <Content Include="Fonts\open-sans-v13-latin-regular.woff2" />
+    <Content Include="App_Config\Include\TAC\Events\Events.DefaultIndexConfiguration.config" />
+    <None Include="App_Config\Include\TAC\Events\events.site.config" />
+    <Content Include="App_Config\Include\TAC\Events\Solr.Events.Web.Index.config" />
+    <None Include="App_Config\Include\TAC\Events\Solr.Events.Master.Index.config" />
     <None Include="packages.config" />
+    <Content Include="Web.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="Views\TAC\Events\Layouts\Events.cshtml" />
+    <Content Include="Views\EventIntro\Index.cshtml" />
+    <Content Include="Views\TAC\Events\PageContent.cshtml" />
+    <Content Include="Views\TAC\Events\Two-Column.cshtml" />
+    <Content Include="Views\TAC\Events\One-Column.cshtml" />
+    <Content Include="Views\TAC\Events\HomeContent.cshtml" />
+    <Content Include="Views\TAC\Events\SideContent.cshtml" />
+    <Content Include="Views\TAC\Events\FeatureRow.cshtml" />
+    <Content Include="Views\TAC\Events\FeaturedEvent.cshtml" />
+    <Content Include="Views\Breadcrumb\Index.cshtml" />
+    <Content Include="Views\Navigation\Index.cshtml" />
+    <Content Include="Views\RelatedEvents\Index.cshtml" />
+    <Content Include="Views\EventsList\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -110,9 +304,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\TAC.Sitecore.Abstractions\TAC.Sitecore.Abstractions.csproj">
+      <Project>{71417f51-8b93-4f15-a2bb-bb12fe286b24}</Project>
+      <Name>TAC.Sitecore.Abstractions</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

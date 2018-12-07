@@ -1,0 +1,20 @@
+﻿@model accounts.tac.local.Models.LoginInfo
+<div class="m-t-1">
+    @if (Model != null && Model.LoginButtons != null && Model.LoginButtons.Any())
+    {
+        foreach (var loginLink in Model.LoginButtons)
+        {
+            <form action="@loginLink.Href" method="post" class="form-signin">
+                <button class="btn btn-block btn-secondary" type="submit">
+                    @if (!string.IsNullOrWhiteSpace(loginLink.IconClass))
+                    {
+                        <i class="@loginLink.IconClass"></i>
+                    }
+                    <span>
+                        @loginLink.Caption
+                    </span>
+                </button>
+            </form>
+        }
+    }
+</div>
